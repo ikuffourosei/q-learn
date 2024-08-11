@@ -78,7 +78,7 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': getenv('DB_NAME', 'quizapp'),
-        'USER': getenv('DB_USER', 'root'),
+        'USER': getenv('DB_USER', ''),
         'PASSWORD': getenv('DB_PASSWORD', ''),
         'HOST': '',
         'PORT': ''

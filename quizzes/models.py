@@ -29,6 +29,7 @@ class Choice(models.Model):
 class User(models.Model):
     """The database table for users"""
     name = models.CharField(max_length=250)
+    passwd = ''
     
     def __str__(self) -> str:
         return self.name

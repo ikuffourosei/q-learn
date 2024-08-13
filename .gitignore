@@ -1,2 +1,5 @@
 # Database Files
 db.sql
+
+#app configurations
+.env

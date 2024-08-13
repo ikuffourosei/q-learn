@@ -1,3 +1,4 @@
 # Database Files
 db.sql
 myenv/
+node_modules

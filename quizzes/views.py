@@ -1,4 +1,4 @@
-from django.shortcuts import render, HttpResponse
+from django.shortcuts import render, get_object_or_404
 from django.http import JsonResponse
 from quizzes.models import Questions, Topics, Choice
 
@@ -6,21 +6,24 @@ from quizzes.models import Questions, Topics, Choice
 def questions(request, topic_name='sports'):
     """Render quiz questions and choices in HTML template."""
     if topic_name:
-        try:
-            topic = Topics.objects.get(name=topic_name)
-            questions = Questions.objects.filter(topics=topic)
-        except Topics.DoesNotExist:
-            return render(request, 'error.html', {'message': 'Topic not found'})
+        topic = get_object_or_404(Topics, name=topic_name)
+        questions = Questions.objects.filter(topics=topic)
 
-    context = {'questions': []}
+    result = {
+        'topic_name': topic_name,
+        'questions': []
+    }
+
     for question in questions:
         choices = Choice.objects.filter(question=question)
         question_data = {
             'question': question.question_text,
             'choices': [choice.choice_text for choice in choices]
         }
-        context['questions'].append(question_data)
-    return JsonResponse(context)
+        result['questions'].append(question_data)
+    print(result)
+    return render(request, 'quiz.html', result)
+
 
 
 def topics(reqeust):

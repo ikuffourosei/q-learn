@@ -3,3 +3,6 @@ db.sql
 
 #app configurations
 .env
+myenv/
+node_modules
+

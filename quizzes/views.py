@@ -15,11 +15,11 @@ def questions(request, topic_name='sports'):
     context = {'questions': []}
     for question in questions:
         choices = Choice.objects.filter(question=question)
-        for ch in choices:
-            context['questions'].append({
-                'questions': question.question_text,
-                'choices': ch.choice_text
-            })
+        question_data = {
+            'question': question.question_text,
+            'choices': [choice.choice_text for choice in choices]
+        }
+        context['questions'].append(question_data)
     return JsonResponse(context)
 
 

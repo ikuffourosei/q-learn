@@ -3,27 +3,21 @@
 {% block title %}Register{% endblock %}
 
 {% block content %}
-<div class="container">
-    <h2>Create Your Qlearn Account</h2>
-    <form method="post">
+<section class="form-section">
+    <h2>Register</h2>
+    <form action="{% url 'register' %}" method="post">
         {% csrf_token %}
-        <div class="form-group">
-            {{ form.username.label_tag }}
-            {{ form.username }}
-        </div>
-        <div class="form-group">
-            {{ form.email.label_tag }}
-            {{ form.email }}
-        </div>
-        <div class="form-group">
-            {{ form.password1.label_tag }}
-            {{ form.password1 }}
-        </div>
-        <div class="form-group">
-            {{ form.password2.label_tag }}
-            {{ form.password2 }}
-        </div>
-        <button type="submit" class="btn custom-btn">Register</button>
+        <label for="username">Username:</label>
+        <input type="text" id="username" name="username" required>
+
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" required>
+
+        <label for="password">Password:</label>
+        <input type="password" id="password" name="password" required>
+
+        <button type="submit" class="btn">Register</button>
     </form>
     <p>Already have an account? <a href="{% url 'login' %}">Login here</a>.</p>
+</section>
 {% endblock %}

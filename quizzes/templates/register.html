@@ -7,17 +7,8 @@
     <h2>Register</h2>
     <form action="{% url 'register' %}" method="post">
         {% csrf_token %}
-        <label for="username">Username:</label>
-        <input type="text" id="username" name="username" required>
-
-        <label for="email">Email:</label>
-        <input type="email" id="email" name="email" required>
-
-        <label for="password">Password:</label>
-        <input type="password" id="password" name="password" required>
-
-        <button type="submit" class="btn">Register</button>
+        {{ form.as_p }}
     </form>
-    <p>Already have an account? <a href="{% url 'login' %}">Login here</a>.</p>
+    <p>Already have an account? <a href="{% url 'login_check' %}">Login here</a>.</p>
 </section>
 {% endblock %}

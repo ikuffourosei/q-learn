@@ -12,18 +12,23 @@
         <nav>
             <h1>Qlearn</h1>
             <ul>
-                <li><a href="{% url 'home' %}">Home</a></li>
-                <li><a href="{% url 'register' %}">Register</a></li>
-                <li><a href="{% url 'login' %}">Login</a></li>
+                <li><a href="{% url 'index' %}">Home</a></li>
+                {% if user.is_authenticated %}
+                    <li><a href="{% url 'logout_check' %}">Logout</a></li>
+                {% else %}
+                    <li><a href="{% url 'register' %}">Register</a></li>
+                    <li><a href="{% url 'login_check' %}">Login</a></li>
+                {% endif %}
             </ul>
         </nav>
     </header>
+
     <main>
-        {% block content %}
-        {% endblock %}
+        {% block content %}{% endblock %}
     </main>
+
     <footer>
-        <p>&copy; 2024 Qlearn. All Rights Reserved.</p>
+        <p>&copy; 2024 Qlearn. All rights reserved.</p>
     </footer>
 </body>
 </html>

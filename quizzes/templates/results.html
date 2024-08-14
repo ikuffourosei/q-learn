@@ -1,10 +1,11 @@
 {% extends 'base.html' %}
 
-{% block title %}Results{% endblock %}
+{% block title %}Quiz Results - Qlearn{% endblock %}
 
 {% block content %}
-<h2>Quiz Results</h2>
-<p>Your score: {{ score }} out of {{ total }}</p>
-<p>Feedback: {{ feedback }}</p>
-<a href="{% url 'dashboard' %}" class="btn btn-secondary">Back to Dashboard</a>
+    <h2>Your Results for {{ topic_name }} Quiz</h2>
+    {% for result in results %}
+        <p>Score: {{ result.score }}%</p>
+    {% endfor %}
+    <a href="{% url 'index' %}">Back to Home</a>
 {% endblock %}

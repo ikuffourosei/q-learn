@@ -1,55 +1,22 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Quiz</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f0f0f0;
-            padding: 20px;
-        }
-        .quiz-container {
-            background-color: rgb(247, 193, 189);
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            max-width: 600px;
-            margin: auto;
-        }
-        .question {
-            margin-bottom: 20px;
-        }
-        .choices {
-            list-style-type: none;
-            padding: 0;
-        }
-        .choices li {
-            margin-bottom: 10px;
-        }
-        .choices label {
-            cursor: pointer;
-        }
-    </style>
-</head>
-<body>
-    <div class="quiz-container">
-        <h1>Quiz: {{ topic_name|default:"Sports" }}</h1>
+{% extends 'base.html' %}
+
+{% block title %}{{ topic_name }} Quiz - Qlearn{% endblock %}
+
+{% block content %}
+    <h2>{{ topic_name }} Quiz</h2>
+    <form method="POST" action="{% url 'submit_quiz' topic_name=topic_name %}">
+        {% csrf_token %}
         {% for question in questions %}
-        <div class="question">
-            <h2>{{ question.question_text }}</h2>
-            <ul class="choices">
+            <div>
+                <p>{{ question.question }}</p>
                 {% for choice in question.choices %}
-                <li>
-                    <input type="radio" id="choice{{ choice.id }}" name="question{{ question.id }}" value="{{ choice.id }}">
-                    <label for="choice{{ choice.id }}">{{ choice.choice_text }}</label>
-                </li>
+                    <label>
+                        <input type="radio" name="{{ forloop.counter0 }}" value="{{ forloop.counter0 }}">
+                        {{ choice }}
+                    </label>
                 {% endfor %}
-            </ul>
-        </div>
+            </div>
         {% endfor %}
-        <button type="submit">Submit</button>
-    </div>
-</body>
-</html>
+        <button type="submit">Submit Quiz</button>
+    </form>
+{% endblock %}

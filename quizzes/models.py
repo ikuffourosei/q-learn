@@ -1,4 +1,5 @@
 from django.db import models
+from django.contrib.auth.models import User
 
 class Topics(models.Model):
     """The database table for topics"""
@@ -26,21 +27,11 @@ class Choice(models.Model):
         return self.choice_text
 
 
-class User(models.Model):
-    """The database table for users"""
-    name = models.CharField(max_length=250)
-    passwd = ''
-    
-    def __str__(self) -> str:
-        return self.name
-
-
 class Results(models.Model):
     """The database table for Results"""
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='results')
     score = models.IntegerField()
-    time = models.TimeField()
     topics = models.ForeignKey(Topics, on_delete=models.CASCADE, related_name='results')
 
     def __str__(self) -> str:
-        return f"{self.user} scored {self.score} in {self.time} on {self.topics}"
+        return f"{self.user} scored {self.score} on {self.topics}"

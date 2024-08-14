@@ -1,29 +1,103 @@
-from django.shortcuts import render, HttpResponse
-from django.http import JsonResponse
-from quizzes.models import Questions, Topics, Choice
+from django.shortcuts import render, get_object_or_404, redirect
+from quizzes.models import Questions, Topics, Choice, Results
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.models import User
+from quizzes.forms import RegisterForm
+from django.contrib.auth.forms import AuthenticationForm
 
 
-def questions(request, topic_name='sports'):
+def index(request):
+    """Welcome page"""
+    return render(request, 'index.html')
+
+
+def register(request):
+    """View for user registration"""
+    if request.method == 'POST':
+        form = RegisterForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('login_check')
+    else:
+        form = RegisterForm()
+    return render(request, 'register.html', {'form': form})
+
+
+def login_check(request):
+    """Function that authenticates a user"""
+    if request.method == 'POST':
+        form = AuthenticationForm(request, data=request.POST)
+        if form.is_valid():
+            user = form.get_user()
+            login(request, user)
+            return redirect('questions')
+    else:
+        form = AuthenticationForm()
+    return render(request, 'login.html', {'form': form})
+
+
+def logout_check(request):
+    """Logs out the current user in session"""
+    logout(request)
+    return redirect('index')
+
+
+@login_required
+def view_questions(request, topic_name='sports'):
     """Render quiz questions and choices in HTML template."""
-    if topic_name:
-        try:
-            topic = Topics.objects.get(name=topic_name)
-            questions = Questions.objects.filter(topics=topic)
-        except Topics.DoesNotExist:
-            return render(request, 'error.html', {'message': 'Topic not found'})
+    topic = get_object_or_404(Topics, name=topic_name)
+    questions = Questions.objects.filter(topics=topic)
 
-    context = {'questions': []}
+    result = {
+        'topic_name': topic_name,
+        'questions': []
+    }
+
     for question in questions:
         choices = Choice.objects.filter(question=question)
         question_data = {
             'question': question.question_text,
             'choices': [choice.choice_text for choice in choices]
         }
-        context['questions'].append(question_data)
-    return JsonResponse(context)
+        result['questions'].append(question_data)
+
+    return render(request, 'quiz.html', result)
 
 
-def topics(reqeust):
-    """Render all topics, allow user to choose a topic and after choosing, redirect to
-    questions url (with desired topic name)
+@login_required
+def submit_quiz(request, topic_name):
+    """Submit a quiz and save the results."""
+    topic = get_object_or_404(Topics, name=topic_name)
+    questions = Questions.objects.filter(topics=topic)
+    total_questions = questions.count()
+    
+    if request.method == 'POST':
+        score = 0
+        for question in questions:
+            selected_choice_id = request.POST.get(str(question.id))
+            if selected_choice_id:
+                selected_choice = Choice.objects.get(id=selected_choice_id)
+                if selected_choice.is_correct:
+                    score += 1
+
+        scores = (score / total_questions) * 100
+        result = Results.objects.create(user=request.user, score=scores, topics=topic)
+        result.save()
+
+        return redirect('result', topic_name=topic_name)
+
+    return view_questions(request, topic_name=topic_name)
+
+
+@login_required
+def result(request, topic_name):
+    """Displays results based on user_id
+    If user took more than one result, display all results for the topic.
     """
+    topic = get_object_or_404(Topics, name=topic_name)
+    user = request.user
+    results = Results.objects.filter(user=user, topics=topic)
+
+    context = {'results': results}
+    return render(request, 'result.html', context)

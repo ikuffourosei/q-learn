@@ -19,6 +19,7 @@ class Questions(models.Model):
     
 
 class Choice(models.Model):
+    """Database table for Chocies"""
     question = models.ForeignKey(Questions, on_delete=models.CASCADE, related_name='choices')
     choice_text = models.CharField(max_length=255)
     is_correct = models.BooleanField(default=False)

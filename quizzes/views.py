@@ -3,6 +3,8 @@ from quizzes.models import Questions, Topics, Choice, Results
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User
+from quizzes.forms import RegisterForm
+from django.contrib.auth.forms import AuthenticationForm
 
 
 def index(request):
@@ -10,24 +12,42 @@ def index(request):
     return render(request, 'index.html')
 
 
+def register(request):
+    """View for user registration"""
+    if request.method == 'POST':
+        form = RegisterForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('login_check')
+    else:
+        form = RegisterForm()
+    return render(request, 'register.html', {'form': form})
+
+
 def login_check(request):
     """Function that authenticates a user"""
-
+    if request.method == 'POST':
+        form = AuthenticationForm(request, data=request.POST)
+        if form.is_valid():
+            user = form.get_user()
+            login(request, user)
+            return redirect('questions')
+    else:
+        form = AuthenticationForm()
+    return render(request, 'login.html', {'form': form})
 
 
 def logout_check(request):
     """Logs out the current user in session"""
     logout(request)
-    redirect('index')
-
+    return redirect('index')
 
 
 @login_required
 def view_questions(request, topic_name='sports'):
     """Render quiz questions and choices in HTML template."""
-    if topic_name:
-        topic = get_object_or_404(Topics, name=topic_name)
-        questions = Questions.objects.filter(topics=topic)
+    topic = get_object_or_404(Topics, name=topic_name)
+    questions = Questions.objects.filter(topics=topic)
 
     result = {
         'topic_name': topic_name,
@@ -41,11 +61,8 @@ def view_questions(request, topic_name='sports'):
             'choices': [choice.choice_text for choice in choices]
         }
         result['questions'].append(question_data)
-    if request.user.is_authenticated:
-        return render(request, 'quiz.html', result)
-    else:
-        redirect('index')
 
+    return render(request, 'quiz.html', result)
 
 
 @login_required
@@ -54,9 +71,9 @@ def submit_quiz(request, topic_name):
     topic = get_object_or_404(Topics, name=topic_name)
     questions = Questions.objects.filter(topics=topic)
     total_questions = questions.count()
-    if request.method == 'POST' and request.user.is_authenticated:
+    
+    if request.method == 'POST':
         score = 0
-
         for question in questions:
             selected_choice_id = request.POST.get(str(question.id))
             if selected_choice_id:
@@ -69,18 +86,14 @@ def submit_quiz(request, topic_name):
         result.save()
 
         return redirect('result', topic_name=topic_name)
-    return view_questions(request, topic_name=topic_name)
 
+    return view_questions(request, topic_name=topic_name)
 
 
 @login_required
 def result(request, topic_name):
     """Displays results based on user_id
-    If user took more than one result, display all
-
-    #example
-    Result1: User_1 scored 50% on sports
-    Result2: User_1 scored 60% om sports
+    If user took more than one result, display all results for the topic.
     """
     topic = get_object_or_404(Topics, name=topic_name)
     user = request.user

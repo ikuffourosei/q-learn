@@ -1,13 +1,25 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from quizzes.models import Questions, Topics, Choice, Results
 from django.contrib.auth.decorators import login_required
-from django.contrib.auth import authenticate
+from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User
 
 
 def index(request):
     """Welcome page"""
     return render(request, 'index.html')
+
+
+def login_check(request):
+    """Function that authenticates a user"""
+
+
+
+def logout_check(request):
+    """Logs out the current user in session"""
+    logout(request)
+    redirect('index')
+
 
 
 @login_required
@@ -71,7 +83,8 @@ def result(request, topic_name):
     Result2: User_1 scored 60% om sports
     """
     topic = get_object_or_404(Topics, name=topic_name)
-    results = Results.objects.filter(user=request.user, topics=topic)
+    user = request.user
+    results = Results.objects.filter(user=user, topics=topic)
 
     context = {'results': results}
     return render(request, 'result.html', context)

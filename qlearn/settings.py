@@ -33,6 +33,11 @@ DEBUG = True
 ALLOWED_HOSTS = ['*']
 
 
+#LOGIN AND LOGOUT REDIRECTION
+LOGIN_REDIRECT_URL = '/'
+LOGOUT_REDIRECT_URL = '/'
+
+
 # Application definition
 
 INSTALLED_APPS = [

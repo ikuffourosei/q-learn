@@ -1,194 +1,184 @@
-/* styles.css */
-/* General Styles for QLearn */
+/* General Styles */
 body {
-    font-family: 'Arial', sans-serif;
-    background-color: #f8f9fa;
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    background-color: #ffffff;
+    color: #333;
+    line-height: 1.6;
 }
 
+/* Header and Navigation */
 header {
-    background-color: #343a40;
-    color: white;
+    background-color: #003366; /* Dark Blue */
     padding: 10px 0;
 }
 
-footer {
-    background-color: #343a40;
-    color: white;
+header h1 {
+    color: #ffffff;
     text-align: center;
-    padding: 20px 0;
-    position: absolute;
-    width: 100%;
-    bottom: 0;
+    margin: 0;
+    font-size: 24px;
 }
 
-.container {
-    margin-top: 20px;
-}
-
-/* Navbar */
-.navbar-brand {
-    font-size: 1.5rem;
-}
-
-/* Buttons */
-.btn {
-    transition: background-color 0.3s ease-in-out;
-}
-
-.btn-primary {
-    background-color: #007bff;
-    border: none;
-}
-
-.btn-primary:hover {
-    background-color: #0056b3;
-}
-
-.btn-light {
-    background-color: #f8f9fa;
-    color: #343a40;
-    border: none;
-}
-
-.btn-light:hover {
-    background-color: #e2e6ea;
-    color: #000;
-}
-
-.btn-success {
-    background-color: #28a745;
-    border: none;
-    border-radius: 5px;
-    padding: 10px 20px;
-}
-
-.btn-success:hover {
-    background-color: #218838;
-}
-
-/* Dashboard specific styling */
-.dashboard-title {
-    font-size: 1.75rem;
-    margin-bottom: 20px;
-}
-
-.dashboard-section {
-    margin-bottom: 30px;
-}
-
-/* Results page */
-.results-container {
-    padding: 20px;
-    background-color: #f1f1f1;
-    border-radius: 5px;
-    margin-top: 20px;
-}
-
-.results-header {
-    font-size: 1.5rem;
-    margin-bottom: 10px;
-}
-
-.results-list {
-    list-style-type: none;
+nav ul {
+    list-style: none;
     padding: 0;
+    display: flex;
+    justify-content: center;
+    margin: 10px 0 0;
 }
 
-.results-list li {
-    padding: 10px;
-    background-color: #fff;
-    margin-bottom: 5px;
-    border-radius: 5px;
-    border: 1px solid #ced4da;
+nav ul li {
+    margin: 0 15px;
 }
 
-/* Forms */
-.form-group label {
+nav ul li a {
+    color: #ffffff;
+    text-decoration: none;
     font-weight: bold;
 }
 
-.form-control {
-    margin-bottom: 15px;
-    padding: 10px;
-    border-radius: 5px;
-    border: 1px solid #ced4da;
+nav ul li a:hover {
+    text-decoration: underline;
 }
 
-.form-control:focus {
-    border-color: #007bff;
-    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+/* Hero Section (index.html) */
+.hero {
+    background-color: #f0f0f0;
+    text-align: center;
+    padding: 50px 20px;
 }
 
-/* Error messages */
-.text-danger {
-    color: #dc3545;
-}
-
-/* Jumbotron */
-.jumbotron {
-    padding: 2rem 1rem;
-}
-
-/* Quiz page */
-.card {
+.hero h2 {
+    color: #003366; /* Dark Blue */
+    font-size: 36px;
     margin-bottom: 20px;
 }
 
-.card-body {
-    padding: 1.5rem;
-    background-color: #fff;
-    border: 1px solid #dee2e6;
-    border-radius: 5px;
+.hero p {
+    font-size: 18px;
+    margin-bottom: 30px;
+    color: #555555;
 }
 
-.form-check-label {
-    margin-left: 10px;
-}
-
-.btn-primary {
-    background-color: #007bff;
-    border: none;
-    border-radius: 5px;
+.hero .btn {
+    background-color: #ff6600; /* Orange */
+    color: #ffffff;
     padding: 10px 20px;
+    text-decoration: none;
+    font-size: 18px;
+    border-radius: 5px;
+    display: inline-block;
 }
 
-.btn-primary:hover {
-    background-color: #0056b3;
+.hero .btn:hover {
+    background-color: #e65c00;
 }
 
-.container {
+/* Form Sections (register.html, login.html) */
+.form-section {
+    max-width: 500px;
+    margin: 50px auto;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.form-section h2 {
+    color: #003366; /* Dark Blue */
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.form-section form {
+    display: flex;
+    flex-direction: column;
+}
+
+.form-section label {
+    font-weight: bold;
+    margin-bottom: 15px;
+}
+
+.form-section input[type="text"],
+.form-section input[type="email"],
+.form-section input[type="password"] {
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #cccccc;
+    border-radius: 4px;
+    font-size: 16px;
     width: 100%;
-    max-width: 600px;
-    margin: 0 auto;
+    box-sizing: border-box;
+}
+
+.form-section .btn {
+    background-color: #003366; /* Dark Blue */
+    color: #ffffff;
+    padding: 10px;
+    font-size: 18px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    text-align: center;
+}
+
+.form-section .btn:hover {
+    background-color: #00224d;
+}
+
+/* Quiz Section Styles */
+.quiz-section {
     padding: 20px;
 }
 
-h2 {
+.question-block {
     margin-bottom: 20px;
 }
 
-.form-group {
-    margin-bottom: 15px;
+.choice {
+    margin-bottom: 10px;
 }
 
-.form-group label {
-    display: block;
-    margin-bottom: 5px;
+.choice input[type="radio"] {
+    margin-right: 10px;
 }
 
-.custom-btn {
-    background-color: #007bff;
-    color: white;
-    border: none;
-    padding: 10px 20px;
-    border-radius: 5px;
-    cursor: pointer;
+/* Footer */
+footer {
+    background-color: #003366; /* Dark Blue */
+    color: #ffffff;
+    text-align: center;
+    padding: 10px 0;
+    position: relative;
+    bottom: 0;
+    width: 100%;
+    margin-top: 50px;
 }
 
-.custom-btn:hover {
-    background-color: #0056b3;
-}
+/* Responsive Design */
+@media (max-width: 768px) {
+    nav ul {
+        flex-direction: column;
+        align-items: center;
+    }
 
-p {
-    margin-top: 20px;
+    nav ul li {
+        margin: 10px 0;
+    }
+
+    .hero h2 {
+        font-size: 28px;
+    }
+
+    .hero p {
+        font-size: 16px;
+    }
+
+    .hero .btn {
+        font-size: 16px;
+        padding: 8px 16px;
+    }
 }

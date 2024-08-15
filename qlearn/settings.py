@@ -37,6 +37,9 @@ ALLOWED_HOSTS = ['*']
 LOGIN_REDIRECT_URL = '/'
 LOGOUT_REDIRECT_URL = '/'
 
+#LOGIN 
+LOGIN_URL = '/quiz/login/'
+
 
 # Application definition
 

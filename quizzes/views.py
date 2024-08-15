@@ -9,7 +9,7 @@ from django.contrib.auth.forms import AuthenticationForm
 
 def index(request):
     """Welcome page"""
-    return render(request, 'index.html')
+    return render(request, 'quizzes/index.html')
 
 
 def register(request):
@@ -21,7 +21,7 @@ def register(request):
             return redirect('login_check')
     else:
         form = RegisterForm()
-    return render(request, 'register.html', {'form': form})
+    return render(request, 'quizzes/register.html', {'form': form})
 
 
 def login_check(request):
@@ -34,7 +34,7 @@ def login_check(request):
             return redirect('questions')
     else:
         form = AuthenticationForm()
-    return render(request, 'login.html', {'form': form})
+    return render(request, 'quizzes/login.html', {'form': form})
 
 
 def logout_check(request):
@@ -62,7 +62,7 @@ def view_questions(request, topic_name='sports'):
         }
         result['questions'].append(question_data)
 
-    return render(request, 'quiz.html', result)
+    return render(request, 'quizzes/quiz.html', result)
 
 
 @login_required
@@ -100,4 +100,4 @@ def result(request, topic_name):
     results = Results.objects.filter(user=user, topics=topic)
 
     context = {'results': results}
-    return render(request, 'result.html', context)
+    return render(request, 'quizzes/result.html', context)

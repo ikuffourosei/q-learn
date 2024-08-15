@@ -9,7 +9,7 @@ from django.contrib.auth.forms import AuthenticationForm
 
 def index(request):
     """Welcome page"""
-    return render(request, 'quizzes/index.html')
+    return render(request, 'quizzes/home.html')
 
 
 def register(request):
@@ -17,8 +17,8 @@ def register(request):
     if request.method == 'POST':
         form = RegisterForm(request.POST)
         if form.is_valid():
-            form.save()
-            return redirect('login_check')
+            user = form.save()
+            login(request, user)
     else:
         form = RegisterForm()
     return render(request, 'quizzes/register.html', {'form': form})
@@ -38,10 +38,9 @@ def login_check(request):
 
 
 def logout_check(request):
-    """Logs out the current user in session"""
+    """Logs out current user"""
     logout(request)
     return redirect('index')
-
 
 @login_required
 def view_questions(request, topic_name='sports'):
@@ -65,7 +64,7 @@ def view_questions(request, topic_name='sports'):
     return render(request, 'quizzes/quiz.html', result)
 
 
-@login_required
+@login_required(login_url='/quiz/login/')
 def submit_quiz(request, topic_name):
     """Submit a quiz and save the results."""
     topic = get_object_or_404(Topics, name=topic_name)
@@ -90,14 +89,12 @@ def submit_quiz(request, topic_name):
     return view_questions(request, topic_name=topic_name)
 
 
-@login_required
+@login_required(login_url='/quiz/login/')
 def result(request, topic_name):
-    """Displays results based on user_id
-    If user took more than one result, display all results for the topic.
-    """
+    """Displays results based on user_id"""
     topic = get_object_or_404(Topics, name=topic_name)
     user = request.user
     results = Results.objects.filter(user=user, topics=topic)
 
     context = {'results': results}
-    return render(request, 'quizzes/result.html', context)
+    return render(request, 'quizzes/results.html', context)

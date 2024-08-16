@@ -5,8 +5,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block title %}Qlearn{% endblock %}</title>
-    <link rel="shortcut icon" href="quizzes/static/images/favicon.ico" type="image/x-icon">
-    <link rel="stylesheet" href="quizzes/static/css/styles.css">
+    <link rel="shortcut icon" href="{% static 'quizzes/images/favicon.ico' %}" type="image/x-icon">
+    <link rel="stylesheet" href="{% static 'quizzes/css/styles.css' %}">
+    
     <style>
         body {
             font-family: 'Arial', sans-serif;
@@ -50,6 +51,6 @@
     </footer>
 
 
-    <script src="{% static 'js/scripts.js' %}"></script>
+    <script src="{% static 'quizzes/js/scripts.js' %}"></script>
 </body>
 </html>

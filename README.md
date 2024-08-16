@@ -17,5 +17,21 @@ The objectives of this project includes the following;
 -  Implement accessibility features to ensure easy usability
 
 # APP FEATURES
-More to be added soon...
+- User registration and authentication
+- View Results 
+- Take quiz on preferred topic
 
+## URL ROUTES
+* '/' - index page (home_page)
+* '/quiz/<str:topic_name>/' - default topic_name is 'sports'. quizzes page (login required)
+* '/quiz/login/' - login page
+* '/quiz/register/' - register page
+* '/quiz/<str:topic_name>/results' - result page (login required)
+* '/quiz/<str:topic_name>/submit' - submit page (login required)
+
+# AUTHORS
+## BACKEND AND DEVOPS
+- EMMANUEL KUFFOUR OSEI
+
+## FRONTEND 
+- EMMANUEL ASANTE

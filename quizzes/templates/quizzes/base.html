@@ -5,52 +5,109 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block title %}Qlearn{% endblock %}</title>
-    <link rel="shortcut icon" href="{% static 'quizzes/images/favicon.ico' %}" type="image/x-icon">
+    <meta name="description" content="Description of the page less than 150 characters">
+    <link rel="icon" type="image/png" href="{% static 'quizzes/images/favicon' %}">
     <link rel="stylesheet" href="{% static 'quizzes/css/styles.css' %}">
-    
-    <style>
-        body {
-            font-family: 'Arial', sans-serif;
-            background-color: #f8f9fa;
-        }
-        header {
-            background-color: #343a40;
-            color: white;
-            padding: 10px 0;
-        }
-        footer {
-            background-color: #343a40;
-            color: white;
-            text-align: center;
-            padding: 20px 0;
-            position: absolute;
-            width: 100%;
-            bottom: 0;
-        }
-        .container {
-            margin-top: 20px;
-        }
-    </style>
-</head>
-<body>
-    <header>
-        {% block header %}
-        {% include 'quizzes/navbar.html' %}
+  </head>
+  <body class="article-page">
+    <!– Header 
+    ============–>
+    <header class="header" data-section-theme="dark">
+      {% block content %}
+        <div class="container">
+            <div class="header-container">
+        <div class="header-logo">
+          <a href="#">
+            <img src="images/qlogo.png" alt="QLearn logo" width="160" height="40">
+          </a>
+        </div>
+        <!- mobile icon 
+        =================->
+            <input class="menu-btn" type="checkbox" id="menu-btn">
+            <label class="menu-icon" for="menu-btn"><span class="navicon"></span></label>
+        <!- end of mobile icon 
+        =================->
+        <nav class="navbar-menu">
+          <ul class="nav">
+            <li class="nav-item">
+              <a href="#index" class="nav-link">Home</a>
+            </li>
+            <li class="nav-item">
+              <a href="#register" class="nav-link">Register</a>
+            </li>
+            <li class="nav-item">
+              <a href="#login" class="nav-link">Login</a>
+            </li>
+            <li class="nav-item">
+              <a href="#about" class="nav-link">About</a>
+            </li>
+            <li class="nav-item">
+                <a href="#logout" class="nav-link">Logout</a>
+            </li>
+           </ul>
+        </nav>
         {% endblock %}
     </header>
-
-    <main class="container my-5">
+    <main>
         {% block content %}
+        {<section class="section-hero hero-homepage" data-section-theme="dark">
+            <div class="container">
+              <div class="section-body">
+                <section class="section-inner">
+                  <h2 class="section-title">Test Your Knowlegde On Diverse Topics</h2>
+                  <a href="#" class="button">Get Started</a>
+                </section>
+              </div>
+            </div>
+          </section>
+          
+          <!– About section 
+          =====================–>
+          <section id="about" class="section section-about-us">
+            <div class="container">
+              <header class="section-header">
+                <h2 class="section-title">About Qlearn</h2>
+                <p class="section-tagline">Everything You Want To Know About QLearn</p>
+              </header>
+              
+                  <div class="col-1-1">
+                    
+                    <p>QLEARN is an interactive quiz app designed to engage you in fun and educational trivia on general topics relating to various aspects of the world. 
+                        You can sign up, participate in quizzes on various topics, and view your scores and best time. 
+                        The app will have performance metrics and progress reports which will help you track your learning journey.</p>
+                  </div>
+                </div>
+              </div>}
         {% endblock %}
     </main>
 
-    <footer class="bg-light text-center py-4">
-        {% block footer %}
-        <p>&copy; 2024 Qlearn. All rights reserved.</p>
+    <footer class="footer" data-section-theme="dark">
+       {% block footer %}
+       <div  class="container">
+          <div class="row">
+            <div class="col-1-1">
+              <img src="{% static 'quizzes/images/qlogo.png' %}" alt="QLearn logo" width="160" height="40">
+            </div>
+          <div class="row">
+            <div class="col-1-1">
+              <p class="footer-copyright">© 2024 QLearn, Made By Emmanuel Osei Kuffuor and Emmanuel Asante.</p>
+            </div>
+            <div class="col-1-1">
+              <ul class="footer-nav nav">
+                <li class="footer-nav-item nav-item">
+                  <a href="#" class="footer-nav-link">Terms of Service</a>
+                </li>
+                <li class="footer-nav-item nav-item">
+                  <a href="#" class="footer-nav-link">Privacy Policy</a>
+                </li>
+                <li class="footer-nav-item nav-item">
+                  <a href="#" class="footer-nav-link">Cookie Policy</a>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
         {% endblock %}
-    </footer>
-
-
-    <script src="{% static 'quizzes/js/scripts.js' %}"></script>
+      </footer>
 </body>
 </html>

@@ -150,13 +150,19 @@
     background: var(--color-white);
   }
 
-  @media screen and (max-width: 768px;){
+  @media screen and (max-width: 768px){
     html{
       font-size: 57%;
     }
   }
 
-  @media screen and (min-width: 481px, max-width: 767px){
+  @media screen and (max-width: 767px){
+    html{
+      font-size: 60%;
+    }
+  }
+
+  @media screen and (min-width: 481px){
     html{
       font-size: 60%;
     }
@@ -361,11 +367,20 @@
     }
   }
 
-  @media screen and (min-width: 481px, max-width: 767px){
+  @media screen and (min-width: 481px)
+  {
     .header-logo{
       flex-basis: 79%;
     }
   }
+
+  @media screen and (max-width: 767px)
+  {
+    .header-logo{
+      flex-basis: 79%;
+    }
+  }
+
 
   /* Footer
       ============================= */
@@ -506,27 +521,14 @@
     }
   }
 
-  /* Section Latest news
-      ============================= */
-
-  .section-latest-news .row {
-    flex-direction: row-reverse;
-  }
-
   @media screen and (max-width: 767px){
     .section-latest-news .row{
       flex-direction: column;
     }
   }
   
-  /* Section SERVICES
-      ============================= */
   
-  .section-services .row {
-    flex-wrap: wrap;
-  }
-  
-  /* Section ABOUT US
+  /* Section ABOUT Qlearn
       ============================= */
   
   .section-about-us [class*='col-'] {
@@ -565,93 +567,3 @@
     padding: 7rem 0 0;
     z-index: 2;
   }
-  
-  .main-article {
-    padding: 5rem 0;
-  }
-
-/* login css */
-
-.form-group {
-    margin-bottom: 20px;
-}
-
-label {
-    display: block;
-    margin-bottom: 10px;
-}
-
-input[type="text"], input[type="password"] {
-    width: 100%;
-    height: 40px;
-    padding: 10px;
-    border: 1px solid #ccc;
-}
-
-button[type="submit"] {
-    background-image: linear-gradient(to bottom, #ff9900, #ff6a00); /* orange gradient */
-    border: none;
-    padding: 10px 20px;
-    font-size: 16px;
-    cursor: pointer;
-    color: #ffffff;
-    border-radius: 5px;
-}
-
-button[type="submit"]:hover {
-    background-image: linear-gradient(to bottom, #ff6a00, #ff9900);
-}
-
-a {
-    text-decoration: none;
-    color: #2f4f7f;
-}
-
-a:hover {
-    color: #ff5e00;
-}
-
-/* register.css */
-
-h1 {
-    text-align: center;
-    color: #2f4f7f; /* dark blue */
-}
-
-.form-group {
-    margin-bottom: 20px;
-}
-
-label {
-    display: block;
-    margin-bottom: 10px;
-}
-
-input[type="text"], input[type="email"], input[type="password"] {
-    width: 100%;
-    height: 40px;
-    padding: 10px;
-    border: 1px solid #ccc;
-}
-
-button[type="submit"] {
-    background-image: linear-gradient(to bottom, #ff9900, #ff6a00); /* orange gradient */
-    border: none;
-    padding: 10px 20px;
-    font-size: 16px;
-    cursor: pointer;
-    color: #ffffff;
-}
-
-button[type="submit"]:hover {
-    background-image: linear-gradient(to bottom, #ff6a00, #ff9900);
-}
-
-a {
-    text-decoration: none;
-    color: #2f4f7f;
-}
-
-a:hover {
-    color: #ff5100;
-}

@@ -6,12 +6,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block title %}Qlearn{% endblock %}</title>
     <meta name="description" content="Description of the page less than 150 characters">
-    <link rel="icon" type="image/png" href="{% static 'quizzes/images/favicon' %}">
+    <link rel="icon" type="image/png" href="{% static 'quizzes/images/favicon.ico' %}">
     <link rel="stylesheet" href="{% static 'quizzes/css/styles.css' %}">
   </head>
   <body class="article-page">
-    <!– Header 
-    ============–>
+    <!– Header –>
     <header class="header" data-section-theme="dark">
       {% block content %}
         <div class="container">
@@ -21,12 +20,6 @@
             <img src="images/qlogo.png" alt="QLearn logo" width="160" height="40">
           </a>
         </div>
-        <!- mobile icon 
-        =================->
-            <input class="menu-btn" type="checkbox" id="menu-btn">
-            <label class="menu-icon" for="menu-btn"><span class="navicon"></span></label>
-        <!- end of mobile icon 
-        =================->
         <nav class="navbar-menu">
           <ul class="nav">
             <li class="nav-item">

@@ -1,24 +1,28 @@
 {% extends 'quizzes/base.html' %}
 
-{% block title %}Quiz{% endblock %}
+{% block title %}Quiz - {{ topic_name }}{% endblock %}
 
 {% block content %}
-<h2>{{ quiz.title }}</h2>
-<form method="post">
-    {% csrf_token %}
-    {% for question in quiz.questions %}
-    <div class="card mb-3">
-        <div class="card-body">
-            <h5 class="card-title">{{ question.text }}</h5>
-            {% for option in question.options %}
-            <div class="form-check">
-                <input class="form-check-input" type="radio" name="question{{ question.id }}" value="{{ option.id }}">
-                <label class="form-check-label">{{ option.text }}</label>
+  <div class="quiz-container">
+    <h1 class="quiz-title">Quiz - {{ topic_name }}</h1>
+    <form method="post" class="quiz-form">
+      {% csrf_token %}
+      {% for question in questions %}
+        <div class="question-block">
+          <h2 class="question-text">{{ question.question }}</h2>
+          {% for choice in question.choices %}
+            <div class="choice-block">
+              <input type="radio" id="{{ choice }}" name="{{ forloop.parentloop.index0 }}" value="{{ choice }}" class="choice-input">
+              <label for="{{ choice }}" class="choice-label">{{ choice }}</label>
             </div>
-            {% endfor %}
+          {% endfor %}
         </div>
-    </div>
-    {% endfor %}
-    <button type="submit" class="btn btn-primary">Submit Quiz</button>
-</form>
+      {% endfor %}
+      <button type="submit" class="submit-button">Submit Quiz</button>
+    </form>
+  </div>
+{% endblock %}
+
+{% block styles %}
+  <link rel="stylesheet" href="{% static 'quizzes/css/quiz.css' %}">
 {% endblock %}

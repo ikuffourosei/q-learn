@@ -3,24 +3,28 @@
 {% block title %}Home{% endblock %}
 
 {% block content %}
-<div class="jumbotron text-center bg-primary text-white">
+  <div class="hero">
     <h1>Welcome to Qlearn</h1>
     <p>Your ultimate platform to learn through quizzes!</p>
-    <a class="btn btn-light btn-lg" href="{% url 'register' %}" role="button">Get Started</a>
-</div>
+    <a class="button" href="{% url 'register' %}">Get Started</a>
+  </div>
 
-<div class="row">
-    <div class="col-md-4">
-        <h3>Learn at Your Own Pace</h3>
-        <p>With Qlearn, you can take quizzes on diverse topics anytime, anywhere.</p>
+  <div class="features">
+    <div class="feature">
+      <h3>Learn at Your Own Pace</h3>
+      <p>With Qlearn, you can take quizzes on diverse topics anytime, anywhere.</p>
     </div>
-    <div class="col-md-4">
-        <h3>Track Your Progress</h3>
-        <p>Monitor your learning journey with detailed quiz results and feedback.</p>
+    <div class="feature">
+      <h3>Track Your Progress</h3>
+      <p>Monitor your learning journey with detailed quiz results and feedback.</p>
     </div>
-    <div class="col-md-4">
-        <h3>Join a Community</h3>
-        <p>Connect with other learners and share your achievements.</p>
+    <div class="feature">
+      <h3>Join a Community</h3>
+      <p>Connect with other learners and share your achievements.</p>
     </div>
-</div>
+  </div>
+{% endblock %}
+
+{% block styles %}
+  <link rel="stylesheet" href="{% static 'quizzes/css/home.css' %}">
 {% endblock %}

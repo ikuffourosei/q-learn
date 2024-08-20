@@ -1,10 +1,18 @@
 {% extends 'quizzes/base.html' %}
 
+{% load static %}
+
 {% block title %}Results{% endblock %}
 
 {% block content %}
-<h2>Quiz Results</h2>
-<p>Your score: {{ score }} out of {{ total }}</p>
-<p>Feedback: {{ feedback }}</p>
-<a href="{% url 'index' %}" class="btn btn-secondary">Back to Dashboard</a>
+  <div class="results-container">
+    <h2 class="results-title">Quiz Results</h2>
+    <div class="results-score">
+      <p>Your score: {{ score }} out of {{ total }}</p>
+    </div>
+    <div class="results-feedback">
+      <p>Feedback: {{ feedback }}</p>
+    </div>
+    <a href="{% url 'dashboard' %}" class="resultbutton">Back to Dashboard</a>
+  </div>
 {% endblock %}

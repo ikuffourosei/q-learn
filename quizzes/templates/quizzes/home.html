@@ -5,28 +5,24 @@
 {% block title %}Home{% endblock %}
 
 {% block content %}
-  <div class="hero">
+  <div class="homehero">
     <h1>Welcome to Qlearn</h1>
     <p>Your ultimate platform to learn through quizzes!</p>
-    <a class="button" href="{% url 'register' %}">Get Started</a>
+    <a class="homebutton" href="{% url 'register' %}">Get Started</a>
   </div>
 
-  <div class="features">
-    <div class="feature">
+  <div class="homefeatures">
+    <div class="homefeature">
       <h3>Learn at Your Own Pace</h3>
       <p>With Qlearn, you can take quizzes on diverse topics anytime, anywhere.</p>
     </div>
-    <div class="feature">
+    <div class="homefeature">
       <h3>Track Your Progress</h3>
       <p>Monitor your learning journey with detailed quiz results and feedback.</p>
     </div>
-    <div class="feature">
+    <div class="homefeature">
       <h3>Join a Community</h3>
       <p>Connect with other learners and share your achievements.</p>
     </div>
   </div>
-{% endblock %}
-
-{% block styles %}
-  <link rel="stylesheet" href="{% static 'quizzes/css/home.css' %}">
 {% endblock %}

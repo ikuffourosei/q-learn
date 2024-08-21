@@ -1,4 +1,4 @@
-.container {
+.login-container {
     width: 300px;
     margin: 70px auto;
     padding: 20px;
@@ -12,7 +12,7 @@ h1 {
     color: #2f4f7f; /* dark blue */
 }
 
-.form-group {
+.loginform-group {
     margin-bottom: 20px;
 }
 

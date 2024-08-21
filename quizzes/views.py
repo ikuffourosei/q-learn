@@ -72,7 +72,7 @@ def view_questions(request, topic_name='sports'):
     return render(request, 'quizzes/quiz.html', result)
 
 
-@login_required(login_url='/quiz/login/')
+@login_required
 def submit_quiz(request, topic_name):
     """Submit a quiz and save the results."""
     topic = get_object_or_404(Topics, name=topic_name)
@@ -97,7 +97,7 @@ def submit_quiz(request, topic_name):
     return view_questions(request, topic_name=topic_name)
 
 
-@login_required(login_url='/quiz/login/')
+@login_required
 def result(request, topic_name):
     """Displays results based on user_id"""
     topic = get_object_or_404(Topics, name=topic_name)
@@ -106,3 +106,7 @@ def result(request, topic_name):
 
     context = {'results': results}
     return render(request, 'quizzes/results.html', context)
+
+def about(request):
+    """About page"""
+    return render(request, 'quizzes/about.html')

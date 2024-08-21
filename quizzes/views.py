@@ -19,19 +19,27 @@ def register(request):
         if form.is_valid():
             user = form.save()
             login(request, user)
+            return redirect('login')
     else:
         form = RegisterForm()
     return render(request, 'quizzes/register.html', {'form': form})
 
 
+
 def login_check(request):
-    """Function that authenticates a user"""
+    """Function that authenticates a user using email"""
     if request.method == 'POST':
         form = AuthenticationForm(request, data=request.POST)
-        if form.is_valid():
-            user = form.get_user()
+        email = request.POST.get('username')
+        password = request.POST.get('password')
+
+        # Authenticate using email
+        user = authenticate(request, username=email, password=password)
+        if user is not None:
             login(request, user)
-            return redirect('questions')
+            return redirect('questions', topic_name='sports')
+        else:
+            form.add_error(None, "Invalid email or password.")
     else:
         form = AuthenticationForm()
     return render(request, 'quizzes/login.html', {'form': form})

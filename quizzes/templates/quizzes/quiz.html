@@ -1,11 +1,14 @@
 {% extends 'quizzes/base.html' %}
 
 {% load static %}
+
 {% block title %}Quiz - {{ topic_name }}{% endblock %}
 
 {% block content %}
   <div class="quiz-container">
-    <h1 class="quiz-title">Quiz - {{ topic_name }}</h1>
+    <h1 class="quiz-title">Welcome to the {{ topic_name }} Quiz!</h1>
+    <p class="welcome-message">We're excited to have you take this quiz! Please read the questions carefully and choose the best answer. Good luck!</p>
+    <h2 class="quiz-subtitle">Get started!</h2>
     <form method="post" class="quiz-form">
       {% csrf_token %}
       {% for question in questions %}

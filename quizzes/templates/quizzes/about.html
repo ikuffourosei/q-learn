@@ -1,0 +1,31 @@
+{% extends 'quizzes/base.html' %}
+
+{% load static %}
+
+{% block title %}About QLearn{% endblock %}
+
+{% block content %}
+  <div class="about-container">
+    <div class="abbackground-image">
+      <img src="{% static 'quizzes/images/1about0.png' %}" alt="About">
+    </div>
+    <div class="abcontent">
+      <h1>About QLearn</h1>
+      <p>QLearn is a quiz platform that provides a wide range of quizzes to help you learn and improve your knowledge.</p>
+      <div class="abimages">
+        <a href="{% url 'register' %}">
+            <img src="{% static 'quizzes/images/about1.png' %}" alt="About 1" class="quiz-image">
+          </a>
+        <a href="{% url 'register' %}">
+            <img src="{% static 'quizzes/images/about2.png' %}" alt="About 2" class="quiz-image">
+          </a>
+        <a href="{% url 'register' %}">
+            <img src="{% static 'quizzes/images/about3.png' %}" alt="About 3" class="quiz-image">
+          </a>
+      </div>
+      <p>Our quizzes are designed to be fun and engaging, with a focus on helping you learn and retain information.</p>
+      <p>Whether you're a student, a professional, or simply someone who loves to learn, QLearn has something for everyone.</p>
+      <p class="catch-phrase">Ready to start learning? <a href="{% url 'home' %}">Get started now and discover a world of knowledge!</a></p>
+    </div>
+  </div>
+{% endblock %}

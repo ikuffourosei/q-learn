@@ -49,3 +49,29 @@ a {
 a:hover {
     color: #ff4800;
 }
+
+.errors {
+  background-color: #ffffff; /* white background */
+  border: 1px solid #ff6a00; /* orange border */
+  padding: 10px;
+  margin-bottom: 20px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  font-size: 14px;
+  color: #2f4f7f; /* dark blue text */
+  text-align: center;
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(255, 105, 0, 0.2);
+}
+
+.errors {
+  animation: error-animation 0.5s;
+}
+
+@keyframes error-animation {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}

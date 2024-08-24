@@ -65,7 +65,7 @@ def view_questions(request, topic_name='sports'):
         choices = Choice.objects.filter(question=question)
         question_data = {
             'question': question.question_text,
-            'choices': [choice.choice_text for choice in choices]
+            'choices': choices
         }
         result['questions'].append(question_data)
 
@@ -80,9 +80,10 @@ def submit_quiz(request, topic_name):
     total_questions = questions.count()
     
     if request.method == 'POST':
+        print(request.POST)
         score = 0
         for question in questions:
-            selected_choice_id = request.POST.get(str(question.id))
+            selected_choice_id = request.POST.get(f'question-{question.id}')
             if selected_choice_id:
                 selected_choice = Choice.objects.get(id=selected_choice_id)
                 if selected_choice.is_correct:
